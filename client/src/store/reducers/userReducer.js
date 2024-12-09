@@ -2,7 +2,7 @@ const initState = {
     userData: {}
 }
 
-const userReducer = (state = initState) => {
+const userReducer = (state = initState, action) => {
     switch (action.type) {
 
 
