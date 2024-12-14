@@ -3,12 +3,13 @@ import { InputFrom, Button } from '../../components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as actions from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isLoggedIn } = useSelector(state => state.auth)
+  const { isLoggedIn, msg, update } = useSelector(state => state.auth)
   const [isRegister, setIsRegister] = useState(location.state?.flag)
   const [invalidFields, setInvalidFields] = useState([])
   const [payload, setPayload] = useState({
@@ -23,6 +24,10 @@ const Login = () => {
   useEffect(() => {
     isLoggedIn && navigate('/')
   }, [isLoggedIn])
+
+  useEffect(() => {
+    msg && Swal.fire('Opps!', msg, 'error')
+  }, [msg, update])
 
   const handleSubmit = async () => {
     let finalPayload = isRegister ? payload : {
@@ -76,9 +81,31 @@ const Login = () => {
     <div className='login-container my-3 bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm'>
       <h3 className='font-semibold text-2xl md-3'>{isRegister ? 'Sign up' : 'Login'}</h3>
       <div className='w-full flex flex-col gap-3'>
-        {isRegister && <InputFrom setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Full Name'} value={payload.name} setValue={setPayload} type={'name'} />}
-        <InputFrom setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Phone Number'} value={payload.phone} setValue={setPayload} type={'phone'} />
-        <InputFrom setInvalidFields={setInvalidFields} invalidFields={invalidFields} label={'Password'} value={payload.password} setValue={setPayload} type={'password'} />
+        {isRegister && <InputFrom
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'Full Name'}
+          value={payload.name}
+          setValue={setPayload}
+          keyPayload={'name'}
+        />}
+        <InputFrom
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'Phone Number'}
+          value={payload.phone}
+          setValue={setPayload}
+          keyPayload={'phone'}
+        />
+        <InputFrom
+          setInvalidFields={setInvalidFields}
+          invalidFields={invalidFields}
+          label={'Password'}
+          value={payload.password}
+          setValue={setPayload}
+          keyPayload={'password'}
+          type={'password'}
+        />
         <Button
           text={isRegister ? 'Sign up' : 'Login'}
           bgColor='bg-secondary1'
