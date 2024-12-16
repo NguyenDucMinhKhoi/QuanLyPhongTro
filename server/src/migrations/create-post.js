@@ -23,10 +23,10 @@ module.exports = {
       attributesId: {
         type: Sequelize.STRING
       },
-      catedgoryCode: {
+      categoryCode: {
         type: Sequelize.STRING
       },
-      description: {
+      desciption: {
         type: Sequelize.STRING
       },
       userId: {
