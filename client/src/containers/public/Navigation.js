@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { formatVietnameseToString } from '../../utils/constant'
+import { formatVietnameseToString } from '../../utils/Common/formatVietnameseToString'
 import { apiGetCategories } from '../../services/category'
 
 const notActive = 'hover:bg-secondary2 flex items-center h-full px-4 bg-secondary1'
