@@ -19,7 +19,7 @@ const Navigation = () => {
         fetchCategories()
     }, [])
     return (
-        <div className='w-screen flex justify-center items-center h-[40px] bg-secondary1 text-white'>
+        <div className='w-full flex justify-center items-center h-[40px] bg-secondary1 text-white'>
             <div className='w-3/5 flex h-full items-center text-sm font-medium'>
                 <NavLink
                     to={`/`}

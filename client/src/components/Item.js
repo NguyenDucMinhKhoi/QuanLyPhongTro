@@ -1,25 +1,21 @@
 import React, { memo, useState } from 'react'
 import icons from '../utils/icons'
 
-const images = [
-    "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/19/6310726d-d075-4e35-b1cb-cf5616bf5212_1658240491.jpg",
-    "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/19/9c60836e-26b2-4737-a6c8-60cb5187fa4c_1658240485.jpg",
-    "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/19/716c753e-8e03-4cc8-9d09-e52ec19ce01b_1658240485.jpg",
-    "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/19/9c60836e-26b2-4737-a6c8-60cb5187fa4c_1658240485.jpg"
-]
+const indexs = [0, 1, 2, 3]
 
 const { GrStar, RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons
 
-const Item = () => {
+const Item = ({ images, user, title, star, description, attributes, address }) => {
     const [isHoverHeart, setIsHoverHeart] = useState(false)
     return (
-        <div className='w-full flex border-t border-orange-600 p-4'>
+        <div className='w-full flex border-t border-orange-600 py-4'>
             <div className='w-2/5 flex flex-wrap gap-[2px] items-center relative cursor-pointer' >
-                <img src={images[0]} alt="preview" className='w-[140px] h-[120px] object-cover' />
-                <img src={images[1]} alt="preview" className='w-[140px] h-[120px] object-cover' />
-                <img src={images[2]} alt="preview" className='w-[140px] h-[120px] object-cover' />
-                <img src={images[3]} alt="preview" className='w-[140px] h-[120px] object-cover' />
-                <span className='bg-overlay-70 text-white px-2 rounded-md absolute left-1 bottom-1'>4 ảnh</span>
+                {images.length > 0 && images.filter((i, index) => indexs.some(ind => ind === index))?.map((i, index) => {
+                    return (
+                        <img key={index} src={i} alt="preview" className='w-[140px] h-[120px] object-cover' />
+                    )
+                })}
+                <span className='bg-overlay-70 text-white px-2 rounded-md absolute left-1 bottom-1'>{`${images.length} ảnh`}</span>
                 <span
                     className='text-white absolute right-5 bottom-1'
                     onMouseEnter={() => setIsHoverHeart(true)}
@@ -36,31 +32,31 @@ const Item = () => {
                         <GrStar className='star-item' size={18} color='yellow' />
                         <GrStar className='star-item' size={18} color='yellow' />
                         <GrStar className='star-item' size={18} color='yellow' />
-                        CHO THUÊ CĂN HỘ HOẶC VĂN PHÒNG LÀM VIỆC
+                        {title}
                     </div>
                     <div className='w-[10%] flex justify-end'>
                         <BsBookmarkStarFill size={24} color='orange' />
                     </div>
                 </div>
                 <div className='my-2 flex items-center justify-between'>
-                    <span className='font-bold text-green-600'>3.7 triệu/tháng</span>
-                    <span>28m²</span>
-                    <span>Quận Tân Bình, Hồ Chí Minh</span>
+                    <span className='font-bold text-green-600'>{attributes?.price}</span>
+                    <span>{attributes?.acreage}</span>
+                    <span>{address}</span>
                 </div>
-                <p className='text-gray-500'>
-                    CĂN HỘ CAO CẤP ĐƯỜNG CỘNG HÒAĐặc điểm: + Nội thất: Máy lạnh, máy giặt, giường, bàn trang điểm, máy nóng lạnh. + Giờ giấc tự do, phòng sạch...
+                <p className='text-gray-500 w-full h-[50px] whitespace-pre-line text-ellipsis overflow-hidden'>
+                    {description}
                 </p>
                 <div className='flex items-center my-5 justify-between'>
                     <div className='flex items-center'>
                         <img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg" alt="avatar" className='w-[30px] h-[30px] object-cover rounded-full' />
-                        <p>DogMyx</p>
+                        <p>{user?.name}</p>
                     </div>
                     <div className='flex items-center gap-1'>
                         <button
                             type='button'
                             className='bg-blue-700 text-white p-1 rounded-md'
                         >
-                            Gọi 0774455916
+                            {`Gọi ${user?.phone}`}
                         </button>
                         <button
                             type='button'
