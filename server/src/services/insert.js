@@ -31,7 +31,7 @@ export const insertService = () =>
           address: item?.header?.address || "No address",
           attributesId: attributeId || v4(), // Fix tên cột
           categoryCode: "CTPT",
-          desciption: item?.mainContent?.content?.join(" ") || "No description",
+          description: item?.mainContent?.content?.join(" ") || "No description",
           userId,
           overviewId,
           imagesId,
