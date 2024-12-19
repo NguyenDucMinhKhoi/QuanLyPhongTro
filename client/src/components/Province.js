@@ -4,7 +4,7 @@ import { location } from '../utils/constant'
 
 const Province = () => {
   return (
-    <div className='flex items-center gap-5 justify-center py-5 shadow-md text-sm'>
+    <div className='flex items-center gap-5 justify-center py-5 text-sm'>
         {location.map(item => {
           return (
             <ProvinceBtn
