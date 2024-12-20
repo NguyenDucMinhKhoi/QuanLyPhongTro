@@ -5,6 +5,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { TbReportMoney } from "react-icons/tb";
 import { RiCrop2Line, RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
+import { HiChevronDoubleRight, HiChevronDoubleLeft  } from "react-icons/hi";
 
 const icons = {
     AiOutlinePlusCircle,
@@ -18,7 +19,9 @@ const icons = {
     GrStar,
     RiHeartFill,
     RiHeartLine,
-    BsBookmarkStarFill 
+    BsBookmarkStarFill,
+    HiChevronDoubleRight,
+    HiChevronDoubleLeft 
 }
 
 export default icons;
