@@ -3,12 +3,13 @@ import { Button, Item } from '../../components'
 import { getPosts, getPostsLimit } from '../../store/actions/post'
 import { useDispatch, useSelector } from 'react-redux'
 
-const List = () => {
+const List = ({ page }) => {
   const dispatch = useDispatch()
   const { posts } = useSelector(state => state.post)
   useEffect(() => {
-    dispatch(getPostsLimit(0))
-  }, [])
+    let offset = page ? +page - 1 : 0
+    dispatch(getPostsLimit(offset))
+  }, [dispatch, page])
   return (
     <div className='w-full p-2 bg-white shadow-md rounded-md px-6'>
       <div className='flex items-center justify-between my-3'>
@@ -32,6 +33,7 @@ const List = () => {
               star={+item?.star}
               title={item?.title}
               user={item?.user}
+              id={item?.id}
             />
           )
         })}

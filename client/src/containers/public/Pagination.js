@@ -4,12 +4,11 @@ import { useSelector } from 'react-redux'
 import icons from '../../utils/icons'
 
 const { HiChevronDoubleRight, HiChevronDoubleLeft } = icons
-const arrNumber = [1, 2, 3]
 
-const Pagination = ({ number }) => {
+const Pagination = ({ page }) => {
     const { count, posts } = useSelector(state => state.post)
     const [arrPage, setArrPage] = useState([])
-    const [currentPage, setCurrentPage] = useState(+number)
+    const [currentPage, setCurrentPage] = useState(+page || 1)
     const [isHideEnd, setIsHideEnd] = useState(false)
     const [isHideStart, setIsHideStart] = useState(false)
 
@@ -26,9 +25,9 @@ const Pagination = ({ number }) => {
 
     return (
         <div className='flex items-center justify-center gap-2 py-5'>
-            {!isHideEnd && <PageNumber icon={<HiChevronDoubleLeft />} setCurrentPage={setCurrentPage} text={1} />}
-            {!isHideEnd && <PageNumber text={'...'} />}
-            {arrNumber.length > 0 && arrNumber.map(item => {
+            {!isHideStart && <PageNumber icon={<HiChevronDoubleLeft />} setCurrentPage={setCurrentPage} text={1} />}
+            {!isHideStart && <PageNumber text={'...'} />}
+            {arrPage.length > 0 && arrPage.map(item => {
                 return (
                     <PageNumber
                         key={item}
