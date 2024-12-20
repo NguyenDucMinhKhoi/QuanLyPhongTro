@@ -1,11 +1,14 @@
 import React from "react";
 import { text } from "../../utils/constant";
-import { Province } from "../../components";
+import { Province, ItemSidebar } from "../../components";
 import { List, Pagination } from "./index";
 import { useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Homepage = () => {
   const [params] = useSearchParams()
+  const { categories } = useSelector(state => state.app)
+
   return (
     <div className="border border-red-500 w-full flex flex-col gap-3">
       <div>
@@ -21,8 +24,10 @@ const Homepage = () => {
 
           </div>
         </div>
-        <div className='w-[30%] border border-green-500'>
-          Sidebar
+        <div className='w-[30%] border border-green-500 flex flex-col gap-4 justify-start items-center'>
+          <ItemSidebar content={categories} title='Danh sách cho thuê' />
+          <ItemSidebar title='Xem theo giá' />
+          <ItemSidebar title='Xem theo diện tích' />
         </div>
       </div>
     </div>
