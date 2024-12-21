@@ -40,7 +40,7 @@ export const insertService = () =>
           overviewId,
           imagesId,
           acreageCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage).code,
-          priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice).code
+          priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice).code,
         });
         await db.Attribute.create({
           id: attributesId,
@@ -88,14 +88,13 @@ export const insertService = () =>
           id: userId,
           name:
             item?.contact?.content.find((i) => i.name === "Liên hệ:")
-              ?.content || "Unknown",
+              ?.content,
           password: hashPassword("123456"),
           phone:
             item?.contact?.content.find((i) => i.name === "Điện thoại:")
-              ?.content || "",
+              ?.content,
           zalo:
-            item?.contact?.content.find((i) => i.name === "Zalo")?.content ||
-            "",
+            item?.contact?.content.find((i) => i.name === "Zalo")?.content,
         });
       });
 
@@ -104,4 +103,26 @@ export const insertService = () =>
       reject(error);
     }
   });
+export const createPricesAndAcreages = () => new Promise((resolve, reject) => {
+  try {
+    dataPrice.forEach(async(item, index) => {
+      await db.Price.create({
+        code: item.code,
+        value: item.value,
+        order: index + 1
+      })
+    })
+    dataAcreage.forEach(async(item, index) => {
+      await db.Acreage.create({
+        code: item.code,
+        value: item.value,
+        order: index + 1
+      })
+    })
+    resolve('OK')
+  } catch (error) {
+    reject(error)
+  }
+})
+
 

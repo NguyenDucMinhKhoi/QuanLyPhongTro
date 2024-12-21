@@ -16,10 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Price.init({
     code: DataTypes.STRING,
-    value: DataTypes.STRING,
+    order: DataTypes.INTEGER,
+    value: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Price',
   });
   return Price;
 };
