@@ -6,7 +6,8 @@ import chothuecanho from "../../data/chothuecanho.json";
 import nhachothue from "../../data/nhachothue.json";
 import chothuephongtro from "../../data/chothuephongtro.json";
 import generateCode from "../utils/generateCode";
-
+import { dataPrice, dataAcreage } from "../utils/data";
+import { getNumberFromString } from "../utils/common";
 require("dotenv").config();
 const dataBody = chothuephongtro.body;
 
@@ -19,25 +20,30 @@ export const insertService = () =>
       dataBody.forEach(async (item) => {
         let postId = v4();
         let labelCode = generateCode(item?.header?.class?.classType);
-        let attributeId = v4();
+        let attributesId = v4();
         let userId = v4();
         let imagesId = v4();
         let overviewId = v4();
+        let desc = JSON.stringify(item?.mainContent?.content)
+        let currentAcreage = getNumberFromString(item?.header?.attributes?.acreage);
+        let currentPrice = getNumberFromString(item?.header?.attributes?.acreage)
         await db.Post.create({
           id: postId,
-          title: item?.header?.title || "No title",
-          star: item?.header?.star || 0,
+          title: item?.header?.title,
+          star: item?.header?.star,
           labelCode,
-          address: item?.header?.address || "No address",
-          attributesId: attributeId || v4(), // Fix tên cột
+          address: item?.header?.address,
+          attributesId,
           categoryCode: "CTPT",
-          description: item?.mainContent?.content?.join(" ") || "No description",
+          description: desc,
           userId,
           overviewId,
           imagesId,
+          acreageCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage).code,
+          priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice).code
         });
         await db.Attribute.create({
-          id: attributeId,
+          id: attributesId,
           price: item?.header?.attributes?.price,
           acreage: item?.header?.attributes?.acreage,
           published: item?.header?.attributes?.published,
@@ -45,7 +51,7 @@ export const insertService = () =>
         });
         await db.Image.create({
           id: imagesId,
-          image: JSON.stringify(item?.images) || "[]",
+          image: JSON.stringify(item?.images)
         });
         await db.Label.findOrCreate({
           where: { code: labelCode },
@@ -98,3 +104,4 @@ export const insertService = () =>
       reject(error);
     }
   });
+
