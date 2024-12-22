@@ -9,7 +9,7 @@ import generateCode from "../utils/generateCode";
 import { dataPrice, dataAcreage } from "../utils/data";
 import { getNumberFromString } from "../utils/common";
 require("dotenv").config();
-const dataBody = chothuephongtro.body;
+const dataBody = nhachothue.body;
 
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12));
@@ -26,7 +26,7 @@ export const insertService = () =>
         let overviewId = v4();
         let desc = JSON.stringify(item?.mainContent?.content)
         let currentAcreage = getNumberFromString(item?.header?.attributes?.acreage);
-        let currentPrice = getNumberFromString(item?.header?.attributes?.acreage)
+        let currentPrice = getNumberFromString(item?.header?.attributes?.price)
         await db.Post.create({
           id: postId,
           title: item?.header?.title,
@@ -34,13 +34,13 @@ export const insertService = () =>
           labelCode,
           address: item?.header?.address,
           attributesId,
-          categoryCode: "CTPT",
+          categoryCode: "NCT",
           description: desc,
           userId,
           overviewId,
           imagesId,
-          acreageCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage).code,
-          priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice).code,
+          acreageCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage)?.code,
+          priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice)?.code,
         });
         await db.Attribute.create({
           id: attributesId,
@@ -105,14 +105,14 @@ export const insertService = () =>
   });
 export const createPricesAndAcreages = () => new Promise((resolve, reject) => {
   try {
-    dataPrice.forEach(async(item, index) => {
+    dataPrice.forEach(async (item, index) => {
       await db.Price.create({
         code: item.code,
         value: item.value,
         order: index + 1
       })
     })
-    dataAcreage.forEach(async(item, index) => {
+    dataAcreage.forEach(async (item, index) => {
       await db.Acreage.create({
         code: item.code,
         value: item.value,

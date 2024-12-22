@@ -4,7 +4,7 @@ import { Province, ItemSidebar } from "../../components";
 import { List, Pagination } from "./index";
 import { useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import * as action from '../../store/actions'
+import * as actions from '../../store/actions'
 
 const Homepage = () => {
   const [params] = useSearchParams()
@@ -12,9 +12,9 @@ const Homepage = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(action.getPrices())
-    dispatch(action.getAcreages())
-  }, [])
+    dispatch(actions.getPrices())
+    dispatch(actions.getAcreages())
+  }, [dispatch])
 
   return (
     <div className="border border-red-500 w-full flex flex-col gap-3">
@@ -25,7 +25,7 @@ const Homepage = () => {
       <Province />
       <div className='w-full flex gap-4'>
         <div className='w-[70%]'>
-          <List page={params.get('page')} />
+          <List />
           <Pagination page={params.get('page')} />
           <div className='h=[500px]'>
 
