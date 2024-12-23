@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { text } from "../../utils/constant";
-import { Province, ItemSidebar } from "../../components";
+import { Province, ItemSidebar, RelatedPost } from "../../components";
 import { List, Pagination } from "./index";
 import { useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -31,6 +31,7 @@ const Homepage = () => {
           <ItemSidebar content={categories} title='Danh sách cho thuê' />
           <ItemSidebar isDouble={true} type='priceCode' content={prices} title='Xem theo giá' />
           <ItemSidebar isDouble={true} content={acreages} type='acreageCode' title='Xem theo diện tích' />
+          <RelatedPost />
         </div>
       </div>
     </div>

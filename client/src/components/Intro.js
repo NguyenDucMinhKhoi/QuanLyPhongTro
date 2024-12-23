@@ -23,7 +23,7 @@ const Intro = () => {
                         return (
                             <Link
                                 to={`/${formatVietnameseToString(item.value)}`}
-                                key={item.id}
+                                key={item.code}
                                 className='text-blue-600 font-medium hover:text-orange-600'
                             >
                                 {` ${item.value.toLowerCase()},`}
