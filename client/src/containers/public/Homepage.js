@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as actions from '../../store/actions'
 
 const Homepage = () => {
-  const [params] = useSearchParams()
   const { categories, prices, acreages } = useSelector(state => state.app)
   const dispatch = useDispatch()
 
@@ -26,7 +25,7 @@ const Homepage = () => {
       <div className='w-full flex gap-4'>
         <div className='w-[70%]'>
           <List />
-          <Pagination page={params.get('page')} />
+          <Pagination />
           <div className='h=[500px]'>
 
           </div>
@@ -34,7 +33,7 @@ const Homepage = () => {
         <div className='w-[30%] border border-green-500 flex flex-col gap-4 justify-start items-center'>
           <ItemSidebar content={categories} title='Danh sách cho thuê' />
           <ItemSidebar isDouble={true} type='priceCode' content={prices} title='Xem theo giá' />
-          <ItemSidebar isDouble={true} content={acreages} title='Xem theo diện tích' />
+          <ItemSidebar isDouble={true} content={acreages} type='acreageCode' title='Xem theo diện tích' />
         </div>
       </div>
     </div>

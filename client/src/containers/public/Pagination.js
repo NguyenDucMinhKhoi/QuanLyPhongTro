@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { PageNumber } from '../../components'
-import { useSelector } from 'react-redux'
-import icons from '../../utils/icons'
+import { PageNumber } from '../../components';
+import { useSelector } from 'react-redux';
+import icons from '../../utils/icons';
+import { useSearchParams } from 'react-router-dom';
 
 const { HiChevronDoubleRight, HiChevronDoubleLeft } = icons
 
-const Pagination = ({ page }) => {
+const Pagination = () => {
     const { count, posts } = useSelector(state => state.post)
     const [arrPage, setArrPage] = useState([])
-    const [currentPage, setCurrentPage] = useState(+page || 1)
+    const [currentPage, setCurrentPage] = useState(1)
     const [isHideEnd, setIsHideEnd] = useState(false)
     const [isHideStart, setIsHideStart] = useState(false)
+    const [searchParams] = useSearchParams()
+
+    useEffect(() => {
+        let page = searchParams.get('page')
+        page && +page !== currentPage && setCurrentPage(+page)
+        !page && setCurrentPage(1)
+    }, [currentPage, searchParams])
 
     useEffect(() => {
         let maxPage = Math.ceil(count / process.env.REACT_APP_LIMIT_POSTS)

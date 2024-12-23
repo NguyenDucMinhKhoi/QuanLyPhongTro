@@ -62,6 +62,11 @@ const acreages = [
     {
         min: 50,
         max: 70,
+        value: 'Từ 50m - 70m'
+    },
+    {
+        min: 50,
+        max: 70,
         value: 'Từ 70m - 90m'
     },
     {
