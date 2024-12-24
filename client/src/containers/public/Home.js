@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./header";
 import { Outlet } from "react-router-dom";
 import { Navigation, Search } from "./index";
 import { Intro, Contact } from "../../components";
+import * as actions from "../../store/actions";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(actions.getPrices())
+    dispatch(actions.getAcreages())
+  }, [dispatch])
   return (
     <div className='w-full flex flex-col gap-4 items-center h-full'>
       <Header />

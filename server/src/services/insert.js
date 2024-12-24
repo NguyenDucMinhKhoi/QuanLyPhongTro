@@ -9,7 +9,7 @@ import generateCode from "../utils/generateCode";
 import { dataPrice, dataAcreage } from "../utils/data";
 import { getNumberFromString } from "../utils/common";
 require("dotenv").config();
-const dataBody = chothuephongtro.body;
+const dataBody = nhachothue.body;
 
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12));
@@ -34,7 +34,7 @@ export const insertService = () =>
           labelCode,
           address: item?.header?.address,
           attributesId,
-          categoryCode: "CTPT",
+          categoryCode: "NCT",
           description: desc,
           userId,
           overviewId,
