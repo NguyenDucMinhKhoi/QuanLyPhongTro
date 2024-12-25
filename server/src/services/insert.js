@@ -66,7 +66,7 @@ export const insertService = () => new Promise(async (resolve, reject) => {
           userId,
           overviewId,
           imagesId,
-          areaCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage)?.code,
+          acreageCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage)?.code,
           priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice)?.code,
           provinceCode,
         })
@@ -121,7 +121,7 @@ export const createPricesAndAcreages = () => new Promise((resolve, reject) => {
         order: index + 1
       })
     })
-    dataArea.forEach(async (item, index) => {
+    dataAcreage.forEach(async (item, index) => {
       await db.Acreage.create({
         code: item.code,
         value: item.value,

@@ -29,7 +29,8 @@ export const getPrices = () => async (dispatch) => {
         if (response?.data.err === 0){
             dispatch({ 
                 type: actionTypes.GET_PRICES, 
-                prices: response.data.response.sort((a, bg) => { return +a.order - +bg.order })
+                prices: response.data.response.sort((a, bg) => { return +a.order - +bg.order }),
+                msg: ''
             })
         } else {
             dispatch({
@@ -41,7 +42,8 @@ export const getPrices = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.GET_PRICES,
-            prices: null
+            prices: null,
+            msg: error
         })
     }
 }
@@ -51,7 +53,8 @@ export const getAcreages = () => async (dispatch) => {
         if (response?.data.err === 0){
             dispatch({ 
                 type: actionTypes.GET_ACREAGES, 
-                acreages: response.data.response.sort((a, b) => { return +a.order - +b.order })
+                acreages: response.data.response.sort((a, b) => { return +a.order - +b.order }),
+                msg: ''
             })
         } else {
             dispatch({
@@ -63,7 +66,32 @@ export const getAcreages = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.GET_ACREAGES,
-            acreages: null
+            acreages: null,
+            msg: error
+        })
+    }
+}
+export const getProvinces = () => async (dispatch) => {
+    try {
+        const response = await apis.apiGetProvinces()
+        if (response?.data.err === 0){
+            dispatch({ 
+                type: actionTypes.GET_PROVINCES, 
+                provinces: response.data.response,
+                msg: ''
+            })
+        } else {
+            dispatch({
+                type: actionTypes.GET_PROVINCES, 
+                msg: response.data.msg,
+                provinces: null
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: actionTypes.GET_PROVINCES,
+            provinces: null,
+            msg: error
         })
     }
 }
