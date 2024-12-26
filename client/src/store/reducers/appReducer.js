@@ -5,7 +5,7 @@ const initState = {
     categories: [],
     prices: [],
     acreages: [],
-    provinces: [],
+    provinces: []
 }
 
 const appReducer = (state = initState, action) => {

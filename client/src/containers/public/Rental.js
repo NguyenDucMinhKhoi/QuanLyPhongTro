@@ -8,7 +8,7 @@ import { formatVietnameseToString } from '../../utils/Common/formatVietnameseToS
 
 const Rental = () => {
   const { prices, acreages, categories } = useSelector(state => state.app)
-  const [categoryCurrent, setCategoryCurrent] = useState('')
+  const [categoryCurrent, setCategoryCurrent] = useState({})
   const [categoryCode, setCategoryCode] = useState('none')
   const location = useLocation()
 

@@ -18,7 +18,7 @@ export const getPosts = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.GET_POSTS,
-            post: null
+            posts: null
         })
     }
 }
@@ -51,12 +51,12 @@ export const getNewPosts = () => async (dispatch) => {
         const response = await apiGetNewPosts()
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.GET_NEW_POSTS,
+                type: actionTypes.GET_NEW_POST,
                 newPosts: response.data.response,
             })
         } else {
             dispatch({
-                type: actionTypes.GET_NEW_POSTS,
+                type: actionTypes.GET_NEW_POST,
                 msg: response.data.msg,
                 newPosts: null
             })
@@ -64,7 +64,7 @@ export const getNewPosts = () => async (dispatch) => {
 
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_NEW_POSTS,
+            type: actionTypes.GET_NEW_POST,
             newPosts: null
         })
     }

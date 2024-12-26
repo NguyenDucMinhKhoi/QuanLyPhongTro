@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 
 const Button = ({ text, textColor, bgColor, IcAfter, onClick, fullWidth, px }) => {
-  console.log('re-render');
   return (
     <button
       type='button'

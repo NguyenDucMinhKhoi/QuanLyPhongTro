@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import moment from 'moment'
 import 'moment/locale/vi'
 
 const SubItem = ({title, price, image, createdAt}) => {
 
     const formatTime = (createdAt) => {
-        moment.locale('vn')
         return moment(createdAt).fromNow()
     }
 
@@ -27,4 +26,4 @@ const SubItem = ({title, price, image, createdAt}) => {
     )
 }
 
-export default SubItem
+export default memo(SubItem)

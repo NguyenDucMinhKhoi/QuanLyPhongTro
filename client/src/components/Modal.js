@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import icons from '../utils/icons'
 
 const { GrLinkPrevious } = icons
@@ -90,4 +90,4 @@ const Modal = ({ setIsShowModal, content, name }) => {
     )
 }
 
-export default Modal
+export default memo(Modal)

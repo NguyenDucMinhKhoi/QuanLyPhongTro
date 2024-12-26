@@ -10,8 +10,8 @@ export const path = {
 }
 
 export const text = {
-    HOME_TITLE: 'DogMyx nơi tìm thấy niềm vui số một Việt Nam',
-    HOME_DESCRIPTION: 'Chào mừng bạn đến với trang web của ông chủ DogMyx, nơi bạn có thể tìm và sở hữu body quyết rũ của DogMyx'
+    HOME_TITLE: 'Kênh thông tin Phòng Trọ số 1 Việt Nam',
+    HOME_DESCRIPTION: "Kênh thông tin Phòng Trọ số 1 Việt Nam - Website đăng tin cho thuê phòng trọ, nhà nguyên căn, căn hộ, ở ghép nhanh, hiệu quả với 100.000+ tin đăng và 2.500.000 lượt xem mỗi tháng."
 }
 
 export const location = [

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { formatVietnameseToString } from '../../utils/Common/formatVietnameseToString'
 import { useDispatch, useSelector } from 'react-redux'
-import * as action from '../../store/actions'
+import * as actions from '../../store/actions'
 
 const notActive = 'hover:bg-secondary2 flex items-center h-full px-4 bg-secondary1'
 const active = 'bg-secondary2 hover:bg-secondary2 flex items-center h-full px-4'
@@ -12,7 +12,7 @@ const Navigation = () => {
     const dispatch = useDispatch()
     const { categories } = useSelector(state => state.app)
     useEffect(() => {
-        dispatch(action.getCategories())
+        dispatch(actions.getCategories())
     }, [])
     return (
         <div className='w-full flex justify-center items-center h-[40px] bg-secondary1 text-white'>

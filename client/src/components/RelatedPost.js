@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Item, SubItem } from './index'
+import { SubItem } from './index'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../store/actions'
 
@@ -7,9 +7,9 @@ const RelatedPost = () => {
     const { newPosts } = useSelector(state => state.post)
     const dispatch = useDispatch()
 
-    useEffect(() => { 
+    useEffect(() => {
         dispatch(actions.getNewPosts())
-     })
+    }, [])
 
     return (
         <div className='w-full bg-white rounded-md p-4'>
@@ -17,7 +17,7 @@ const RelatedPost = () => {
             <div className='w-full flex flex-col gap-2'>
                 {newPosts?.map(item => {
                     return (
-                        <SubItem 
+                        <SubItem
                             key={item.id}
                             title={item.title}
                             price={item?.attributes?.price}
