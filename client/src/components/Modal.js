@@ -18,6 +18,18 @@ const Modal = ({ setIsShowModal, content, name }) => {
         }
     }, [persent1, persent2])
 
+    const handleClickStack = (e) => {
+        const activedTrackEl = document.getElementById('track-active')
+        const stackEl = document.getElementById('track')
+        const stackRect = stackEl.getBoundingClientRect()
+        let persent = Math.round((e.clientX - stackRect.left) * 100 / stackRect.width)
+        if (Math.abs(persent - persent1) <= (Math.abs(persent - persent2))) {
+            activedTrackEl.style.left = `${persent1}%`
+        } else {
+            activedTrackEl.style.right = `${100 - persent2}%`
+        }
+    }
+
     return (
         <div onClick={() => { setIsShowModal(false) }}
             className='fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 flex justify-center items-center'
@@ -50,8 +62,8 @@ const Modal = ({ setIsShowModal, content, name }) => {
                 </div>}
                 {(name === 'price' || name === 'acreage') && <div className='p-12'>
                     <div className='flex flex-col items-center justify-center relative'>
-                        <div className='slider-track h-[5px] w-full absolute top-0 bottom-0 bg-gray-300 rounded-full'></div>
-                        <div id='track-active' className='slider-track-active h-[5px] absolute top-0 bottom-0 bg-orange-500 rounded-full'></div>
+                        <div onClick={handleClickStack} id='track' className='slider-track h-[5px] w-full absolute top-0 bottom-0 bg-gray-300 rounded-full'></div>
+                        <div onClick={handleClickStack} id='track-active' className='slider-track-active h-[5px] absolute top-0 bottom-0 bg-orange-500 rounded-full'></div>
                         <input
                             max='100'
                             min='0'
