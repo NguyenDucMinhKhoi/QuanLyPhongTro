@@ -29,6 +29,13 @@ const Modal = ({ setIsShowModal, content, name }) => {
             activedTrackEl.style.right = `${100 - persent2}%`
         }
     }
+    const convert100to15 = persent => (Math.ceil(Math.round((persent * 1.5)) / 5) * 5) / 10
+        // 10% => 1.5
+        // 9% => 1.35 * 10 = 14 / 5 = 2 dư 4 => 5 * 5 = 25 / 10 = 2.5
+        // 8% => 1.2 * 10 = 12 / 5 = 2 dư 2 => 3 * 5 = 15 / 10 = 1.5
+        // 11& => 1.65 * 10 = 17 / 5 = 3 dư 2 => 4 * 5 = 20 / 10 = 2
+       
+    
 
     return (
         <div onClick={() => { setIsShowModal(false) }}
@@ -62,6 +69,9 @@ const Modal = ({ setIsShowModal, content, name }) => {
                 </div>}
                 {(name === 'price' || name === 'acreage') && <div className='p-12'>
                     <div className='flex flex-col items-center justify-center relative'>
+                        <div className='z-30 absolute top-[-40px] font-bold text-xl text-orange-600'>
+                            {`Từ ${persent1 <= persent2 ? convert100to15(persent1) : convert100to15(persent2)} - ${persent2 >= persent1 ? convert100to15(persent2) : convert100to15(persent1)} triệu`}
+                        </div>
                         <div onClick={handleClickStack} id='track' className='slider-track h-[5px] w-full absolute top-0 bottom-0 bg-gray-300 rounded-full'></div>
                         <div onClick={handleClickStack} id='track-active' className='slider-track-active h-[5px] absolute top-0 bottom-0 bg-orange-500 rounded-full'></div>
                         <input
@@ -82,6 +92,10 @@ const Modal = ({ setIsShowModal, content, name }) => {
                             onChange={(e) => setPersent2(+e.target.value)}
                             className='w-full appearence-none pointer-events-none absolute top-0 bottom-0'
                         />
+                        <div className='absolute z-30 top-4 left-0 right-0 flex justify-between items-center'>
+                            <span className='px-3'>0</span>
+                            <span className='mr-[-16px]'>15 triệu+</span>
+                        </div>
                     </div>
                 </div>
                 }
