@@ -9,15 +9,14 @@ const Modal = ({ setIsShowModal, content, name }) => {
 
     useEffect(() => {
         const activedTrackEl = document.getElementById('track-active')
-        activedTrackEl.style.left = `${persent1}%`
-        
-    }, [persent1])
-
-    useEffect(() => {
-        const activedTrackEl = document.getElementById('track-active')
-        activedTrackEl.style.right = `${100 - persent2}%`
-
-    }, [persent2])
+        if (persent2 <= persent1) {
+            activedTrackEl.style.left = `${persent2}%`
+            activedTrackEl.style.right = `${100 - persent1}%`
+        } else {
+            activedTrackEl.style.left = `${persent1}%`
+            activedTrackEl.style.right = `${100 - persent2}%`
+        }
+    }, [persent1, persent2])
 
     return (
         <div onClick={() => { setIsShowModal(false) }}
@@ -60,7 +59,7 @@ const Modal = ({ setIsShowModal, content, name }) => {
                             type='range'
                             value={persent1}
                             className='w-full appearence-none pointer-events-none absolute top-0 bottom-0'
-                            onChange={(e) => setPersent1(e.target.value)}
+                            onChange={(e) => setPersent1(+e.target.value)}
                         />
                         <input
                             max='100'
@@ -68,7 +67,7 @@ const Modal = ({ setIsShowModal, content, name }) => {
                             step='5'
                             type='range'
                             value={persent2}
-                            onChange={(e) => setPersent2(e.target.value)}
+                            onChange={(e) => setPersent2(+e.target.value)}
                             className='w-full appearence-none pointer-events-none absolute top-0 bottom-0'
                         />
                     </div>
