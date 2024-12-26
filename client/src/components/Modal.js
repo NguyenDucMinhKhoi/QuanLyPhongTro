@@ -10,11 +10,13 @@ const Modal = ({ setIsShowModal, content, name }) => {
     useEffect(() => {
         const activedTrackEl = document.getElementById('track-active')
         activedTrackEl.style.left = `${persent1}%`
+        
     }, [persent1])
 
     useEffect(() => {
         const activedTrackEl = document.getElementById('track-active')
-        activedTrackEl.style.left = `${100 - persent2}%`
+        activedTrackEl.style.right = `${100 - persent2}%`
+
     }, [persent2])
 
     return (

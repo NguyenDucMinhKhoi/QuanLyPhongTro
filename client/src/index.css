@@ -11,10 +11,12 @@ input[type="range"]::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     height: 5px;
 }
+
 input[type="range"]::-moz-range-track {
     -moz-appearance: none;
     height: 5px;
 }
+
 input[type="range"]::-ms-track {
     appearance: none;
     height: 5px;
@@ -24,12 +26,12 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 2rem;
     height: 2rem;
-    background-color: blue;
+    background-color: white;
     border: solid 1px #ccc;
     border-radius: 1rem;
     margin-top: -0,6rem;
     pointer-events: auto;
-    cursor: pointer ;
+    cursor: pointer;
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
@@ -40,12 +42,12 @@ input[type="range"]::-moz-range-thumb {
     -moz-appearance: none;
     width: 2rem;
     height: 2rem;
-    background-color: blue;
+    background-color: white;
     border: solid 1px #ccc;
     border-radius: 1rem;
-    margin-top: -0,6rem;
+    margin-top: -0.6rem;
     pointer-events: auto;
-    cursor: pointer ;
+    cursor: pointer;
 }
 
 input[type="range"]::-moz-range-thumb:active {
@@ -56,12 +58,12 @@ input[type="range"]::-ms-thumb {
     appearance: none;
     width: 2rem;
     height: 2rem;
-    background-color: blue;
+    background-color: white;
     border: solid 1px #ccc;
     border-radius: 1rem;
-    margin-top: -0,6rem;
+    margin-top: -0.6rem;
     pointer-events: auto;
-    cursor: pointer ;
+    cursor: pointer;
 }
 
 input[type="range"]::-ms-thumb:active {
