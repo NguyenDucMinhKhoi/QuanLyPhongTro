@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { SearchItem, Modal } from '../../components'
 import icons from '../../utils/icons'
 import { useSelector } from 'react-redux'
@@ -11,27 +11,33 @@ const Search = () => {
   const [content, setContent] = useState([])
   const [name, setName] = useState('')
   const { provinces, acreages, prices, categories } = useSelector(state => state.app)
+  const [queries, setQueries] = useState({})
 
   const handleShowModal = (content, name) => {
     setContent(content)
     setName(name)
     setIsShowModal(true)
   }
+  const handleSubmit = useCallback((e, query) => {
+    e.stopPropagation()
+    setQueries(prev => ({ ...prev, ...query }))
+    setIsShowModal(false)
+  }, [isShowModal, queries])
 
   return (
     <>
       <div className='p-[10px] w-3/5 my-3 bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2'>
         <span onClick={() => handleShowModal(categories, 'category')} className='cursor-pointer flex-1'>
-          <SearchItem IconBefore={<BsBuildings />} frontWeight IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text='Phòng trọ, nhà trọ' />
+          <SearchItem IconBefore={<BsBuildings />} frontWeight IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.category} defaultText={'Phòng trọ, nhà trọ'} />
         </span>
         <span onClick={() => handleShowModal(provinces, 'province')} className='cursor-pointer flex-1'>
-          <SearchItem IconBefore={<HiOutlineLocationMarker />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text='Toàn quốc' />
+          <SearchItem IconBefore={<HiOutlineLocationMarker />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.province} defaultText={'Toàn quốc'} />
         </span>
         <span onClick={() => handleShowModal(prices, 'price')} className='cursor-pointer flex-1'>
-          <SearchItem IconBefore={<TbReportMoney />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text='Chọn giá' />
+          <SearchItem IconBefore={<TbReportMoney />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.prices} defaultText={'Chọn giá'} />
         </span>
         <span onClick={() => handleShowModal(acreages, 'acreage')} className='cursor-pointer flex-1'>
-          <SearchItem IconBefore={<RiCrop2Line />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text='Chọn diện tích' />
+          <SearchItem IconBefore={<RiCrop2Line />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.acreage} defaultText={'Chọn diện tích'} />
         </span>
         <button
           type='button'
@@ -41,7 +47,7 @@ const Search = () => {
           Tìm kiếm
         </button>
       </div>
-      {isShowModal && <Modal content={content} name={name} setIsShowModal={setIsShowModal} />}
+      {isShowModal && <Modal handleSubmit={handleSubmit} queries={queries} content={content} name={name} setIsShowModal={setIsShowModal} />}
     </>
   )
 }
