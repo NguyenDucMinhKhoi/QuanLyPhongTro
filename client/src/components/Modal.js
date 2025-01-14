@@ -9,10 +9,10 @@ const Modal = ({ setIsShowModal, content, name, handleSubmit, queries, arrMinMax
 
     const [persent1, setPersent1] = useState(name === 'price' && arrMinMax?.priceArr
         ? arrMinMax?.priceArr[0]
-        : name === 'acreage' && arrMinMax?.areaArr ? arrMinMax?.areaArr[0] : 0)
+        : name === 'acreage' && arrMinMax?.acreageArr ? arrMinMax?.acreageArr[0] : 0)
     const [persent2, setPersent2] = useState(name === 'price' && arrMinMax?.priceArr
         ? arrMinMax?.priceArr[1]
-        : name === 'acreage' && arrMinMax?.areaArr ? arrMinMax?.areaArr[1] : 100)
+        : name === 'acreage' && arrMinMax?.acreageArr ? arrMinMax?.acreageArr[1] : 100)
     const [activedEl, setActivedEl] = useState('')
 
     useEffect(() => {
@@ -77,7 +77,7 @@ const Modal = ({ setIsShowModal, content, name, handleSubmit, queries, arrMinMax
         let arrMinMax = [convert100toTarget(min), convert100toTarget(max)]
         // const gaps = name === 'price'
         //     ? getCodes(arrMinMax, content)
-        //     : name === 'area' ? getCodesArea(arrMinMax, content) : []
+        //     : name === 'acreage' ? getCodesAcreage(arrMinMax, content) : []
         handleSubmit(e, {
             [`${name}Number`]: arrMinMax,
             [name]: `Từ ${convert100toTarget(min)} - ${convert100toTarget(max)} ${name === 'price' ? 'triệu' : 'm2'}`

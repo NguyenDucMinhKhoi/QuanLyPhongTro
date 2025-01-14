@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { SearchItem, Modal } from '../../components'
 import icons from '../../utils/icons'
 import { useSelector } from 'react-redux'
+import { getCodes, getCodesAcreage } from '../../utils/Common/getCodes'
 
 const { BsChevronRight, HiOutlineLocationMarker, TbReportMoney, RiCrop2Line, BsBuildings, FiSearch } = icons
 
@@ -12,16 +13,18 @@ const Search = () => {
   const [name, setName] = useState('')
   const { provinces, acreages, prices, categories } = useSelector(state => state.app)
   const [queries, setQueries] = useState({})
+  const [arrMinMax, setArrMinMax] = useState({})
 
   const handleShowModal = (content, name) => {
     setContent(content)
     setName(name)
     setIsShowModal(true)
   }
-  const handleSubmit = useCallback((e, query) => {
+  const handleSubmit = useCallback((e, query, arrMaxMin) => {
     e.stopPropagation()
     setQueries(prev => ({ ...prev, ...query }))
     setIsShowModal(false)
+    arrMaxMin && setArrMinMax(prev => ({ ...prev, ...arrMaxMin }))
   }, [isShowModal, queries])
 
   return (
@@ -34,7 +37,7 @@ const Search = () => {
           <SearchItem IconBefore={<HiOutlineLocationMarker />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.province} defaultText={'Toàn quốc'} />
         </span>
         <span onClick={() => handleShowModal(prices, 'price')} className='cursor-pointer flex-1'>
-          <SearchItem IconBefore={<TbReportMoney />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.prices} defaultText={'Chọn giá'} />
+          <SearchItem IconBefore={<TbReportMoney />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.price} defaultText={'Chọn giá'} />
         </span>
         <span onClick={() => handleShowModal(acreages, 'acreage')} className='cursor-pointer flex-1'>
           <SearchItem IconBefore={<RiCrop2Line />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.acreage} defaultText={'Chọn diện tích'} />
@@ -47,7 +50,14 @@ const Search = () => {
           Tìm kiếm
         </button>
       </div>
-      {isShowModal && <Modal handleSubmit={handleSubmit} queries={queries} content={content} name={name} setIsShowModal={setIsShowModal} />}
+      {isShowModal && <Modal
+        handleSubmit={handleSubmit}
+        queries={queries}
+        arrMinMax={arrMinMax}
+        content={content}
+        name={name}
+        setIsShowModal={setIsShowModal}
+      />}
     </>
   )
 }

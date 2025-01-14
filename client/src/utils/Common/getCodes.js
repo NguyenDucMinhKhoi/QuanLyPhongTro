@@ -32,7 +32,7 @@ export const getCodes = (arrMinMax, prices) => {
     const pricesWithMinMax = getCodePrice(prices)
     return pricesWithMinMax.filter(item => (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) || (item.max >= arrMinMax[0] && item.max <= arrMinMax[1]))
 }
-export const getCodesAcreage = (arrMinMax, areas) => {
-    const areasWithMinMax = getCodeAcreage(areas)
-    return areasWithMinMax.filter(item => (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) || (item.max >= arrMinMax[0] && item.max <= arrMinMax[1]))
+export const getCodesAcreage = (arrMinMax, acreages) => {
+    const acreagesWithMinMax = getCodeAcreage(acreages)
+    return acreagesWithMinMax.filter(item => (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) || (item.max >= arrMinMax[0] && item.max <= arrMinMax[1]))
 }
