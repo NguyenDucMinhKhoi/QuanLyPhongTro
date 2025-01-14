@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react'
 import { SearchItem, Modal } from '../../components'
 import icons from '../../utils/icons'
-import { useSelector } from 'react-redux'
-import { getCodes, getCodesAcreage } from '../../utils/Common/getCodes'
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../store/actions'
 
 const { BsChevronRight, HiOutlineLocationMarker, TbReportMoney, RiCrop2Line, BsBuildings, FiSearch } = icons
 
 const Search = () => {
-
+const dispatch = useDispatch()
   const [isShowModal, setIsShowModal] = useState(false)
   const [content, setContent] = useState([])
   const [name, setName] = useState('')
@@ -26,6 +26,12 @@ const Search = () => {
     setIsShowModal(false)
     arrMaxMin && setArrMinMax(prev => ({ ...prev, ...arrMaxMin }))
   }, [isShowModal, queries])
+  const handleSearch = () => {
+    const queryCodes = Object.entries(queries).filter(item => item[0].includes('Code'))
+    let queryCodesObj = {}
+    queryCodes.forEach(item => { queryCodesObj[item[0]] = item[1] })
+    dispatch(actions.getPostsLimit(queryCodesObj))
+  }
 
   return (
     <>
@@ -44,6 +50,7 @@ const Search = () => {
         </span>
         <button
           type='button'
+          onClick={handleSearch}
           className='outline-none py-2 px-4 flex-1 bg-secondary1 rounded-lg text-[13.3px] flex items-center justify-center gap-2 text-white font-medium'
         >
           <FiSearch />
