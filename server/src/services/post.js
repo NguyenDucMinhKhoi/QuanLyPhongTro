@@ -40,7 +40,7 @@ export const getPostsService = () => new Promise(async (resolve, reject) => {
 export const getPostsLimitService = (page, query, { priceNumber, acreageNumber }) => new Promise(async (resolve, reject) => {
     try {
         let offset = (!page || +page <= 1) ? 0 : (+page - 1)
-        const queries = { ...query, }
+        const queries = { ...query }
         if (priceNumber) queries.priceNumber = { [Op.between]: priceNumber }
         if (acreageNumber) queries.acreageNumber = { [Op.between]: acreageNumber }
         const response = await db.Post.findAndCountAll({
