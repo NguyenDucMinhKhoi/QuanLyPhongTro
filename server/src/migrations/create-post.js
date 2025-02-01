@@ -48,6 +48,12 @@ module.exports = {
       imagesId: {
         type: Sequelize.STRING
       },
+      priceNumber: {
+        type: Sequelize.FLOAT
+      },
+      acreageNumber: {
+        type: Sequelize.FLOAT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

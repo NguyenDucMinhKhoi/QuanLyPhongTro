@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { SearchItem, Modal } from '../../components'
 import icons from '../../utils/icons'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, createSearchParams, useLocation } from 'react-router-dom'
 import { path } from '../../utils/constant'
 
@@ -19,7 +19,7 @@ const Search = () => {
   const [defaultText, setDefaultText] = useState('')
 
   useEffect(() => {
-    if (!location.pathname.includes(path.SEARCH)) {
+    if (!location?.pathname.includes(path.SEARCH)) {
       setArrMinMax({})
       setQueries({})
     }
@@ -37,21 +37,22 @@ const Search = () => {
     setIsShowModal(false)
     arrMaxMin && setArrMinMax(prev => ({ ...prev, ...arrMaxMin }))
   }, [isShowModal, queries])
+
   const handleSearch = () => {
-    const queryCodes = Object.entries(queries).filter(item => item[0].includes('Code')).filter(item => item[1])
+    const queryCodes = Object.entries(queries).filter(item => item[0].includes('Number') || item[0].includes('Code')).filter(item => item[1])
     let queryCodesObj = {}
     queryCodes.forEach(item => { queryCodesObj[item[0]] = item[1] })
-    const queryText = Object.entries(queries).filter(item => !item[0].includes('Code'))
+    const queryText = Object.entries(queries).filter(item => !item[0].includes('Code') || !item[0].includes('Number'))
     console.log(queryText)
     let queryTextObj = {}
     queryText.forEach(item => { queryTextObj[item[0]] = item[1] })
     console.log(queryTextObj)
-    let titleSearch = `${queryTextObj.category 
-      ? queryTextObj.category 
-      : 'Cho thuê tất cả'} ${queryTextObj.province 
-        ? `tỉnh ${queryTextObj.province}` 
-        : ''} ${queryTextObj.price 
-          ? `giá ${queryTextObj.price}` 
+    let titleSearch = `${queryTextObj.category
+      ? queryTextObj.category
+      : 'Cho thuê tất cả'} ${queryTextObj.province
+        ? `tỉnh ${queryTextObj.province}`
+        : ''} ${queryTextObj.price
+          ? `giá ${queryTextObj.price}`
           : ''} ${queryTextObj.acreage ? `diện tích ${queryTextObj.acreage}` : ''}`
     navigate({
       pathname: path.SEARCH,

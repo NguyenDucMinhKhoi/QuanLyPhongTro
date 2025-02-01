@@ -7,7 +7,7 @@ import nhachothue from '../../data/nhachothue.json'
 import chothuephongtro from '../../data/chothuephongtro.json'
 import generateCode from '../utils/generateCode'
 import { dataPrice, dataAcreage } from '../utils/data'
-import { getNumberFromString } from '../utils/common'
+import { getNumberFromString, getNumberFromStringV2 } from '../utils/common'
 require('dotenv').config()
 const dataBody = [
   {
@@ -69,6 +69,8 @@ export const insertService = () => new Promise(async (resolve, reject) => {
           acreageCode: dataAcreage.find(acreage => acreage.max > currentAcreage && acreage.min <= currentAcreage)?.code,
           priceCode: dataPrice.find(acreage => acreage.max > currentPrice && acreage.min <= currentPrice)?.code,
           provinceCode,
+          priceNumber: getNumberFromStringV2(item?.header?.attributes?.price),
+          acreageNumber: getNumberFromStringV2(item?.header?.attributes?.acreage)
         })
         await db.Attribute.create({
           id: attributesId,

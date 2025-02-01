@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { text } from "../../utils/constant";
 import { Province, ItemSidebar, RelatedPost } from "../../components";
 import { List, Pagination } from "./index";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { formatVietnameseToString } from '../../utils/Common/formatVietnameseToString';
 
@@ -11,6 +11,7 @@ const Rental = () => {
   const [categoryCurrent, setCategoryCurrent] = useState({})
   const [categoryCode, setCategoryCode] = useState('none')
   const location = useLocation()
+  const dispatch = useDispatch()
 
   useState(() => {
     const category = categories?.find(item => `/${formatVietnameseToString(item.value)}` === location.pathname)
