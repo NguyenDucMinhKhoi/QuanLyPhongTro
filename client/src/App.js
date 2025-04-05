@@ -1,8 +1,19 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, Rental, Homepage, DetailPost, SearchDetail } from './containers/public';
 import { path } from './utils/constant';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import * as actions from './store/actions'
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(actions.getPrices())
+    dispatch(actions.getAcreages())
+    dispatch(actions.getProvinces())
+  }, [])
+
   return (
     <div className="bg-primary">
       <Routes>

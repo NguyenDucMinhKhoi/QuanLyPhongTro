@@ -1,6 +1,5 @@
 import db from '../models'
-
-const { Op, where } = require('sequelize')
+const { Op } = require("sequelize")
 
 export const getPostsService = () => new Promise(async (resolve, reject) => {
     try {

@@ -26,7 +26,7 @@ const ItemSidebar = ({ content, title, isDouble, type }) => {
     }
     const handlefilterPosts = (code) => {
         navigate({
-            pathname: location.pathname,
+            pathname: location?.pathname,
             search: createSearchParams({
                 [type]: code
             }).toString()
