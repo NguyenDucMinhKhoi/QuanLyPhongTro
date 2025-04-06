@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import logo from "../../Assets/LogoHome.png";
-import { Button } from "../../components";
+import { Button, User } from "../../components";
 import icons from "../../utils/icons";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { path } from "../../utils/constant";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../store/actions";
 import menuManage from "../../utils/menuManage";
-import { AiOutlineLogout } from "react-icons/ai";
 
-const { AiOutlinePlusCircle } = icons;
+const { AiOutlinePlusCircle, BsChevronDown, AiOutlineLogout } = icons;
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,7 +16,6 @@ const Header = () => {
   const [searchParams] = useSearchParams();
   const headerRef = useRef();
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { currentData } = useSelector((state) => state.user);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const goLogin = useCallback((flag) => {
     navigate(path.LOGIN, { state: { flag } });
@@ -55,13 +53,14 @@ const Header = () => {
             </div>
           )}
           {isLoggedIn && (
-            <div className="flex items-center gap-1 relative">
-              <small>{currentData.name}</small>
+            <div className="flex items-center gap-3 relative">
+              <User />
               <Button
                 text={"Quản lý tài khoản"}
                 textColor="text-white"
                 bgColor="bg-red-700"
                 px="px-4"
+                IcAfter={BsChevronDown}
                 onClick={() => setIsShowMenu((prev) => !prev)}
               />
               {isShowMenu && (
@@ -80,7 +79,10 @@ const Header = () => {
                   })}
                   <span
                     className="cursor-pointer hover:text-orange-500 flex items-center gap-2 text-blue-600 border-gray-200 py-2"
-                    onClick={() => dispatch(actions.logout())}
+                    onClick={() => {
+                      setIsShowMenu(false);
+                      dispatch(actions.logout());
+                    }}
                   >
                     <AiOutlineLogout />
                     Đăng xuất

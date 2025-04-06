@@ -4,6 +4,7 @@ import {
   BsChevronRight,
   BsBuildings,
   BsBookmarkStarFill,
+  BsChevronDown,
 } from "react-icons/bs";
 import {
   HiOutlineLocationMarker,
@@ -38,6 +39,7 @@ const icons = {
   ImPencil2,
   MdOutlineLibraryBooks,
   BiUserPin,
+  BsChevronDown
 };
 
 export default icons;
