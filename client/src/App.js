@@ -10,11 +10,18 @@ import {
 import { path } from "./utils/constant";
 import { System, CreatePost } from "./containers/System";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actions from "./store/actions";
 
 function App() {
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    setTimeout(() => {
+      isLoggedIn && dispatch(actions.getCurrent());
+    }, 1000);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     dispatch(actions.getPrices());
