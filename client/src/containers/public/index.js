@@ -1,6 +1,6 @@
 export { default as Login } from './login'
 export { default as Home } from './Home'
-export { default as Header } from './header'
+export { default as Header } from './Header'
 export { default as Navigation } from './Navigation'
 export { default as Rental } from './Rental'
 export { default as Homepage } from './Homepage'

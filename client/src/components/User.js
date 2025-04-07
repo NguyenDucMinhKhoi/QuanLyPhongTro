@@ -12,7 +12,7 @@ const User = () => {
           Xin Chào, <span className="font-semibold">{currentData?.name}</span>
         </span>
         <span>
-          Mã tài khoản: <span className="font-medium">{`${currentData?.id.slice(0, 10)}...`}</span>
+          Mã tài khoản: <span className="font-medium">{`${currentData?.id?.slice(0, 10)}...`}</span>
         </span>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Header from "./header";
+import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import { Navigation, Search } from "./index";
 import { Intro, Contact } from "../../components";
