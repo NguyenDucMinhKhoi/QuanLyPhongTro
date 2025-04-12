@@ -14,4 +14,4 @@ export { default as Modal } from "./Modal";
 export { default as User } from "./User";
 export { default as Overview } from "./Overview";
 export { default as Address } from "./Address";
-export { default as SelectAddress } from "./SelectAddress";
+export { default as LocationSelect } from "./LocationSelect";

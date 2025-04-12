@@ -7,17 +7,29 @@ const instance = axios.create({
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
-    // Gắn token vào header
-    let token =
-      window.localStorage.getItem("persist:auth") &&
-      JSON.parse(window.localStorage.getItem("persist:auth"))?.token?.slice(
-        1,
-        -1
-      );
-    config.headers = {
-      authorization: token ? `Bearer ${token}` : null, 
-    };
+    // Get token from localStorage
+    const authData = window.localStorage.getItem("persist:auth");
+    let token = null;
+
+    if (authData) {
+      try {
+        const parsedAuth = JSON.parse(authData);
+        // Handle different token formats
+        if (parsedAuth.token) {
+          token = parsedAuth.token.replace(/"/g, ""); // Remove quotes if present
+        }
+      } catch (error) {
+        console.error("Error parsing auth data:", error);
+      }
+    }
+
+    // Add token to headers if it exists
+    if (token) {
+      config.headers = {
+        ...config.headers,
+        authorization: `Bearer ${token}`,
+      };
+    }
     return config;
   },
   function (error) {
@@ -28,10 +40,15 @@ instance.interceptors.request.use(
 // Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
-    // refresh token
     return response;
   },
   function (error) {
+    // Handle 401 errors
+    if (error.response && error.response.status === 401) {
+      // Clear auth data and redirect to login
+      window.localStorage.removeItem("persist:auth");
+      window.location.href = "/login";
+    }
     return Promise.reject(error);
   }
 );
