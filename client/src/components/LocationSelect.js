@@ -82,8 +82,8 @@ const LocationSelect = ({ onLocationChange }) => {
   // Xử lý khi chọn Tỉnh/Thành
   const handleProvinceChange = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
-    const provinceValue = selectedOption.value; 
-    const provinceName = selectedOption.text;   
+    const provinceValue = selectedOption.value; // Thường là mã code (VD: 20)
+    const provinceName = selectedOption.text;   // Thường là "Tỉnh Lạng Sơn"
     setSelectedProvince(provinceValue);
 
     // Gửi dữ liệu lên cha nếu có onLocationChange
@@ -92,6 +92,8 @@ const LocationSelect = ({ onLocationChange }) => {
         province: provinceValue,
         district: '',
         ward: '',
+        // Ở đây gán trực tiếp name; 
+        // nếu bạn muốn cắt bớt chữ "Tỉnh " thì có thể sửa provinceName.replace("Tỉnh ","") ...
         provinceName,
         districtName: '',
         wardName: ''
@@ -107,7 +109,7 @@ const LocationSelect = ({ onLocationChange }) => {
     setSelectedDistrict(districtValue);
 
     // Lấy lại tên tỉnh đang chọn
-    const currentProvince = provinces.find(p => p.code === selectedProvince);
+    const currentProvince = provinces.find(p => p.code == selectedProvince);
 
     if (onLocationChange) {
       onLocationChange({
@@ -129,8 +131,8 @@ const LocationSelect = ({ onLocationChange }) => {
     setSelectedWard(wardValue);
 
     // Lấy lại tên tỉnh và quận/huyện đang chọn
-    const currentProvince = provinces.find(p => p.code === selectedProvince);
-    const currentDistrict = districts.find(d => d.code === selectedDistrict);
+    const currentProvince = provinces.find(p => p.code == selectedProvince);
+    const currentDistrict = districts.find(d => d.code == selectedDistrict);
 
     if (onLocationChange) {
       onLocationChange({
