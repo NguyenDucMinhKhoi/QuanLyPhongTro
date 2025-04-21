@@ -5,6 +5,7 @@ import {
   BsBuildings,
   BsBookmarkStarFill,
   BsChevronDown,
+  BsCameraFill
 } from "react-icons/bs";
 import {
   HiOutlineLocationMarker,
@@ -23,6 +24,7 @@ const icons = {
   AiOutlineLogout,
   GrNext,
   BsChevronRight,
+  BsCameraFill,
   HiOutlineLocationMarker,
   TbReportMoney,
   RiCrop2Line,

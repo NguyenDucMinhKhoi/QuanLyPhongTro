@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { InputFrom, Button } from "../../components";
+import { InputForm, Button } from "../../components";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -99,7 +99,7 @@ const Login = () => {
         </h3>
         <div className="w-full flex flex-col gap-3">
           {isRegister && (
-            <InputFrom
+            <InputForm
               setInvalidFields={setInvalidFields}
               invalidFields={invalidFields}
               label={"Full Name"}
@@ -108,7 +108,7 @@ const Login = () => {
               keyPayload={"name"}
             />
           )}
-          <InputFrom
+          <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={"Phone Number"}
@@ -116,7 +116,7 @@ const Login = () => {
             setValue={setPayload}
             keyPayload={"phone"}
           />
-          <InputFrom
+          <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             label={"Password"}
