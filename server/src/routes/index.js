@@ -22,9 +22,12 @@ const initRoutes = (app) => {
     const router = express.Router()
     router.use('/api/location', locationRoutes)
 
-    return app.use('/', (req, res) => {
+    app.use('/', router)
+    app.get('/', (req, res) => {
         res.send('server on ...')
     })
+
+    return app
 }
 
 export default initRoutes

@@ -109,7 +109,7 @@ const LocationSelect = ({ onLocationChange }) => {
     setSelectedDistrict(districtValue);
 
     // Lấy lại tên tỉnh đang chọn
-    const currentProvince = provinces.find(p => p.code == selectedProvince);
+    const currentProvince = provinces.find(p => p.code === selectedProvince);
 
     if (onLocationChange) {
       onLocationChange({
@@ -131,8 +131,8 @@ const LocationSelect = ({ onLocationChange }) => {
     setSelectedWard(wardValue);
 
     // Lấy lại tên tỉnh và quận/huyện đang chọn
-    const currentProvince = provinces.find(p => p.code == selectedProvince);
-    const currentDistrict = districts.find(d => d.code == selectedDistrict);
+    const currentProvince = provinces.find(p => p.code === selectedProvince);
+    const currentDistrict = districts.find(d => d.code === selectedDistrict);
 
     if (onLocationChange) {
       onLocationChange({
@@ -150,9 +150,13 @@ const LocationSelect = ({ onLocationChange }) => {
     <div className="space-y-4">
       {/* Chọn tỉnh/thành */}
       <div>
-        <label htmlFor="province" className="block text-sm font-medium text-gray-700">
-          Tỉnh/Thành phố
-        </label>
+        <div className='flex'>
+          <label htmlFor="province" className="block text-sm font-medium text-gray-700">
+            Tỉnh/Thành phố
+          </label>
+          <span className='text-red-500'>(*)</span>
+        </div>
+
         <div className="relative">
           <select
             id="province"
@@ -178,9 +182,12 @@ const LocationSelect = ({ onLocationChange }) => {
 
       {/* Chọn quận/huyện */}
       <div>
-        <label htmlFor="district" className="block text-sm font-medium text-gray-700">
-          Quận/Huyện
-        </label>
+        <div className='flex'>
+          <label htmlFor="district" className="block text-sm font-medium text-gray-700">
+            Quận/Huyện
+          </label>
+          <span className='text-red-500'>(*)</span>
+        </div>
         <div className="relative">
           <select
             id="district"

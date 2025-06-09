@@ -37,14 +37,17 @@ const Item = ({ images, user, title, star, description, attributes, address, id 
             </Link>
             <div className='w-3/5'>
                 <div className='flex justify-between gap-4 w-full'>
-                    <div className='text-red-600 font-medium'>
+                    <Link
+                        to={`chi-tiet/${formatVietnameseToString(title)}/${id}`}
+                        className='text-red-600 font-medium cursor-pointer hover:underline'
+                    >
                         {handleStar(+star).length > 0 && handleStar(+star).map((star, number) => {
                             return (
                                 <span key={number}>{star}</span>
                             )
                         })}
                         {title}
-                    </div>
+                    </Link>
                     <div className='w-[10%] flex justify-end'>
                         <BsBookmarkStarFill size={24} color='orange' />
                     </div>

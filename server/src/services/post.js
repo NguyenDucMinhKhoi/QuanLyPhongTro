@@ -110,3 +110,66 @@ export const getNewPostService = () => new Promise(async (resolve, reject) => {
         reject()
     }
 })
+
+export const createPostService = (data) => new Promise(async (resolve, reject) => {
+    try {
+        const { title, star, address, categoryCode, priceCode, acreageCode, description, priceNumber, acreageNumber, target, images, userId } = data;
+
+        // Tạo bản ghi trong bảng Attributes
+        const attributes = await db.Attribute.create({
+            price: priceNumber,
+            acreage: acreageNumber,
+            published: new Date(),
+            hashtag: target
+        });
+
+        // Tạo bản ghi trong bảng Overview
+        const overview = await db.Overview.create({
+            code: categoryCode,
+            area: acreageNumber,
+            type: target
+        });
+
+        // Tạo bản ghi trong bảng Post
+        const post = await db.Post.create({
+            id: Math.random().toString(36).substring(2, 8), // Tạo id ngẫu nhiên
+            title,
+            star,
+            address,
+            categoryCode,
+            priceCode,
+            acreageCode,
+            description,
+            priceNumber,
+            acreageNumber,
+            userId,
+            attributesId: attributes.id,
+            overviewId: overview.id
+        });
+
+        // Lưu ảnh
+        const imagePromises = images.map(async (image) => {
+            return await db.Image.create({
+                image: image.path, // Đường dẫn ảnh sau khi upload
+                postId: post.id
+            });
+        });
+
+        await Promise.all(imagePromises);
+
+        resolve({
+            err: 0,
+            msg: 'Created post successfully',
+            response: {
+                id: post.id,
+                title: post.title,
+                address: post.address,
+                priceNumber: post.priceNumber,
+                acreageNumber: post.acreageNumber
+            }
+        });
+
+    } catch (error) {
+        reject(error);
+    }
+});

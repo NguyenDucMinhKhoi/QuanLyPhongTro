@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import * as actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { FaFacebookF } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
   const location = useLocation();
@@ -33,9 +35,9 @@ const Login = () => {
     let finalPayload = isRegister
       ? payload
       : {
-          phone: payload.phone,
-          password: payload.password,
-        };
+        phone: payload.phone,
+        password: payload.password,
+      };
     let invalids = validate(finalPayload);
     if (invalids === 0)
       isRegister
@@ -132,6 +134,32 @@ const Login = () => {
             fullWidth
             onClick={handleSubmit}
           />
+
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <button
+              className="flex-1 flex items-center justify-center gap-2 bg-[#1877F2] text-white py-2 rounded-md hover:bg-[#1877F2]/90 transition-colors"
+              onClick={() => {/* Handle Facebook login */ }}
+            >
+              <FaFacebookF size={20} />
+              <span>Facebook</span>
+            </button>
+            <button
+              className="flex-1 flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-50 transition-colors"
+              onClick={() => {/* Handle Google login */ }}
+            >
+              <FcGoogle size={24} />
+              <span className="font-medium">Google</span>
+            </button>
+          </div>
         </div>
         <div className="mt-7 flex items-center justify-between">
           {isRegister ? (

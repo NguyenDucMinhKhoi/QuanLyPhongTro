@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LocationSelect from "./LocationSelect";
 
-const Address = () => {
+const Address = ({ value, onChange, error }) => {
   const [location, setLocation] = useState({
     province: "",
     district: "",
@@ -39,8 +39,21 @@ const Address = () => {
     }
 
     // Kết hợp các phần thông tin thành địa chỉ đầy đủ
-    setFullAddress(parts.join(', ') || 'Vui lòng chọn địa chỉ');
-  }, [streetNumber, location]);
+    const newFullAddress = parts.join(', ') || 'Vui lòng chọn địa chỉ';
+    
+    // Chỉ cập nhật fullAddress nếu nó khác với giá trị hiện tại
+    if (newFullAddress !== fullAddress) {
+      setFullAddress(newFullAddress);
+      // Chỉ gọi onChange nếu địa chỉ thực sự thay đổi
+      if (newFullAddress !== value) {
+        onChange(newFullAddress);
+      }
+    }
+  }, [streetNumber, location, fullAddress, value, onChange]);
+
+  const handleStreetNumberChange = (e) => {
+    setStreetNumber(e.target.value);
+  };
 
   return (
     <div>
@@ -52,10 +65,10 @@ const Address = () => {
           <input
             type="text"
             id="street-number"
-            className="border border-gray-200 rounded-md p-2 w-full outline-none focus:border-blue-500"
+            className={`border rounded-md p-2 w-full outline-none focus:border-blue-500 ${error ? 'border-red-500' : 'border-gray-200'}`}
             placeholder="Nhập số nhà, tên đường..."
             value={streetNumber}
-            onChange={(e) => setStreetNumber(e.target.value)}
+            onChange={handleStreetNumberChange}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -64,10 +77,13 @@ const Address = () => {
             type="text"
             id="full-address"
             readOnly
-            className="border border-gray-200 rounded-md p-2 w-full outline-none bg-gray-50"
+            className={`border rounded-md p-2 w-full outline-none bg-gray-50 ${error ? 'border-red-500' : 'border-gray-200'}`}
             value={fullAddress}
             placeholder="Vui lòng chọn địa chỉ"
           />
+          {error && (
+            <span className="text-red-500 text-sm">{error}</span>
+          )}
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ router.get('/provinces', async (req, res) => {
   }
 });
 
-router.get('/districts/:  provinceCode', async (req, res) => {
+router.get('/districts/:provinceCode', async (req, res) => {
   try {
     const districts = await getDistricts(req.params.provinceCode);
     res.json(districts);

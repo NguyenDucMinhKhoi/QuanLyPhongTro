@@ -8,7 +8,6 @@ const notActive =
   "hover:bg-secondary2 flex items-center h-full px-4 bg-secondary1";
 const active =
   "bg-secondary2 hover:bg-secondary2 flex items-center h-full px-4";
-
 const Navigation = ({ isAdmin }) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.app);

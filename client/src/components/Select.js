@@ -14,9 +14,12 @@ const Select = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
-        {label}
-      </label>
+      <div className='flex'>
+        <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+          {label}
+        </label>
+        <span className='text-red-500'>(*)</span>
+      </div>
       <div className="relative">
         <select
           id={id}
@@ -27,8 +30,8 @@ const Select = ({
         >
           <option value="">{placeholder || `Chọn ${label}`}</option>
           {options?.map((item) => (
-            <option 
-              key={item[valueKey]} 
+            <option
+              key={item[valueKey]}
               value={item[valueKey]}
             >
               {item[nameKey]}
